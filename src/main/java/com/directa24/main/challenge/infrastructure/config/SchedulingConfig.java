@@ -1,6 +1,8 @@
 package com.directa24.main.challenge.infrastructure.config;
 
 import com.directa24.main.challenge.domain.service.MovieStatusTracker;
+import com.directa24.main.challenge.infrastructure.scheduling.JpaMovieStatusTracker;
+import com.directa24.main.challenge.infrastructure.storage.db.PagingStatusJpaRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
@@ -33,8 +35,8 @@ public class SchedulingConfig implements AsyncConfigurer {
     }
 
     @Bean
-    public MovieStatusTracker movieTrackingStatus() {
-        return new InMemoryMovieStatusTracker();
+    public MovieStatusTracker movieTrackingStatus(PagingStatusJpaRepository pagingStatusJpaRepository) {
+        return new JpaMovieStatusTracker(pagingStatusJpaRepository);
     }
 
     @Override
