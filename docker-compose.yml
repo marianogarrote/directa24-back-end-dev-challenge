@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  app:
+    image: 'docker-spring-boot-postgres:latest'
+    build: .
+#      context: src/main/docker
+#      context: .
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - apidb-net
+    container_name: app
+    depends_on:
+      - db
+    environment:
+      - TZ=America/Sao_Paulo
+      - spring.datasource.url=jdbc:postgresql://db:5432/compose-postgres
+#      - spring.r2dbc.url=jdbc:postgresql://db:5432/events_provider
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/compose-postgres
+      - SPRING_DATASOURCE_USERNAME=compose-postgres
+      - SPRING_DATASOURCE_PASSWORD=compose-postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+#      - SPRING_DATASOURCE_PORT=5432
+#      - SPRING_DATASOURCE_NAME=compose-postgres
+#      - SPRING_DATASOURCE_HOST=db
+#      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+  db:
+    image: 'postgres:13.1-alpine'
+    restart: always
+    networks:
+      - apidb-net
+    container_name: db
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=compose-postgres
+      - POSTGRES_PASSWORD=compose-postgres
+networks:
+  apidb-net:

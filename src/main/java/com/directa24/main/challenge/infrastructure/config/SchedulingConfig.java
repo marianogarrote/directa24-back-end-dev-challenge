@@ -1,9 +1,6 @@
 package com.directa24.main.challenge.infrastructure.config;
 
-import com.directa24.main.challenge.domain.repository.DirectorStatisticsRepository;
 import com.directa24.main.challenge.domain.service.MovieStatusTracker;
-import com.directa24.main.challenge.infrastructure.storage.inmemory.InMemoryDirectoryStatisticsRepository;
-import com.directa24.main.challenge.infrastructure.scheduling.InMemoryMovieStatusTracker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
@@ -33,11 +30,6 @@ public class SchedulingConfig implements AsyncConfigurer {
 
     public SchedulingConfig(TaskExecutionProperties taskExecutionProperties) {
         this.taskExecutionProperties = taskExecutionProperties;
-    }
-
-    @Bean
-    public DirectorStatisticsRepository directorStatisticsRepository() {
-        return new InMemoryDirectoryStatisticsRepository();
     }
 
     @Bean

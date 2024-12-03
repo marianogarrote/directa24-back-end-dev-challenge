@@ -6,8 +6,6 @@ import com.directa24.main.challenge.application.dto.MoviePageDto;
 import com.directa24.main.challenge.application.dto.PagingStatusDto;
 import com.directa24.main.challenge.domain.exception.DomainException;
 import com.directa24.main.challenge.domain.repository.DirectorStatisticsRepository;
-import com.directa24.main.challenge.infrastructure.storage.inmemory.InMemoryDirectoryStatisticsRepository;
-import com.directa24.main.challenge.infrastructure.scheduling.InMemoryMovieStatusTracker;
 import com.directa24.main.challenge.utils.JsonReader;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
